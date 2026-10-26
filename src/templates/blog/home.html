@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site_name }} | Artículos{% endblock %}
+
+{% block content %}
+<section class="intro-band" aria-labelledby="page-title">
+  <div class="intro-copy">
+    <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Cuaderno abierto · Robótica</p>
+    <h1 id="page-title">Ideas que<br><em>se ponen en movimiento.</em></h1>
+    <p class="intro-description">Notas sobre máquinas que perciben, deciden y exploran el mundo físico.</p>
+  </div>
+  <div class="intro-diagram" aria-hidden="true">
+    <div class="orbit orbit-one"></div>
+    <div class="orbit orbit-two"></div>
+    <div class="diagram-core"><span>R<br>01</span></div>
+    <span class="diagram-label label-top">SENSAR</span>
+    <span class="diagram-label label-bottom">ACTUAR</span>
+    <span class="diagram-cross cross-one">+</span>
+    <span class="diagram-cross cross-two">+</span>
+  </div>
+</section>
+
+<section class="article-section" aria-labelledby="recent-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Archivo de campo / 01</p>
+      <h2 id="recent-title">Lecturas recientes</h2>
+    </div>
+    <span class="entry-count">{{ articles|length }} {% if articles|length == 1 %}artículo{% else %}artículos{% endif %}</span>
+  </div>
+  {% if articles %}
+    <ol class="article-list">
+      {% for article in articles %}
+        <li class="article-row">
+          <time class="article-date" datetime="{{ article.published_at|date:'c' }}">{{ article.published_at|date:"j M Y" }}</time>
+          <div class="article-summary">
+            <h3><a href="{% url 'blog:article_detail' article.slug %}">{{ article.title }}</a></h3>
+            <p>{{ article.excerpt }}</p>
+          </div>
+          <a class="row-arrow" href="{% url 'blog:article_detail' article.slug %}" aria-label="Leer: {{ article.title }}"><span aria-hidden="true">↗</span></a>
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p class="empty-state">Aún no hay artículos publicados. Vuelve pronto para descubrir nuevas notas.</p>
+  {% endif %}
+</section>
+{% endblock %}

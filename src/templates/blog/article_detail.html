@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} | {{ site_name }}{% endblock %}
+
+{% block content %}
+<article class="article-page">
+  <a class="back-link" href="{% url 'blog:home' %}"><span aria-hidden="true">←</span> Todos los artículos</a>
+  <header class="article-header">
+    <p class="eyebrow">{{ article.published_at|date:"j F Y" }} <span aria-hidden="true">/</span> {{ article.author }}</p>
+    <h1>{{ article.title }}</h1>
+    <p class="article-deck">{{ article.excerpt }}</p>
+  </header>
+  <div class="prose">{{ rendered_content|safe }}</div>
+  <a class="back-link article-end-link" href="{% url 'blog:home' %}"><span aria-hidden="true">←</span> Volver a la portada</a>
+</article>
+{% endblock %}

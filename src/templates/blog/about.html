@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Sobre mí | {{ site_name }}{% endblock %}
+
+{% block content %}
+<section class="about-page" aria-labelledby="page-title">
+  <p class="eyebrow">Quién escribe / 01</p>
+  <h1 id="page-title">{{ about_page.title|default:"Sobre mí" }}</h1>
+  {% if about_page %}
+    <div class="about-copy">{{ about_page.content|linebreaks }}</div>
+  {% else %}
+    <p class="about-copy">Este espacio reúne ideas, pruebas y aprendizajes sobre robótica, desde los sensores hasta los sistemas autónomos.</p>
+  {% endif %}
+  <a class="back-link" href="{% url 'blog:home' %}"><span aria-hidden="true">←</span> Volver a los artículos</a>
+</section>
+{% endblock %}
